@@ -1,3 +1,6 @@
+<!--掲示板ページ
+新規投稿の他に編集ページ・削除ページ・検索ページ・登録変更ページ・退会ページへの移動等-->
+
 <?php session_start(); ?>
 
 <head>
@@ -17,12 +20,12 @@ $pdo=new PDO("mysql:host=(ホスト名);dbname=(データベース名);charset=u
 $sql="create table if not exists comments(id text not null,number int not null auto_increment primary key,name text,comment text default null,time text,data mediumblob default null,width int default null,height int default null,type text default null,filename text default null);"; //テーブル作成
 $pdo->query($sql);
 
-if($_SESSION["password"]==""||$_SESSION["id"]==""){
+if($_SESSION["password"]==""||$_SESSION["id"]==""){//ログイン状態の確認
 	header("location:toppage.php");
 	exit();
 }
 
-if(isset($_POST["exit"])){
+if(isset($_POST["exit"])){//ログアウト処理
 	unset($_SESSION["password"]);
 	unset($_SESSION["id"]);
 	unset($_SESSION["name"]);
@@ -30,7 +33,7 @@ if(isset($_POST["exit"])){
 	exit();
 }
 
-if(isset($_POST["search"])){
+if(isset($_POST["search"])){//検索ページへの移動
 	if($_POST["column"]!=""){
 		if($_POST["word"]!=""){
 			$_SESSION["column"]=$_POST["column"];
@@ -41,22 +44,22 @@ if(isset($_POST["search"])){
 	}else $searcherror="検索する項目を指定してください<br/>";
 }
 
-if(isset($_POST["change"])){
+if(isset($_POST["change"])){//登録情報変更ページへの移動
 	header("location:change.php");
 	exit();
 }
 
-if(isset($_POST["help"])){
+if(isset($_POST["help"])){//ヘルプページへの移動
 	header("location:help.php");
 	exit();
 }
 
-if(isset($_POST["deleteaccount"])){
+if(isset($_POST["deleteaccount"])){//退会ページへの移動
 	header("location:deleteaccount.php");
 	exit();
 }
 
-if(isset($_POST["delete"])){
+if(isset($_POST["delete"])){//削除ページへの移動
 	if($_POST["dnum"]!=""){
 		$delete=$_POST["dnum"];
 		$sql="select number,id from comments ;";
@@ -75,7 +78,7 @@ if(isset($_POST["delete"])){
 	}else $deleteerror="削除したい投稿の番号を入力してください<br/>";
 }
 
-if(isset($_POST["edit"])){
+if(isset($_POST["edit"])){//編集ページへの移動
 	if($_POST["enum"]!=""){
 		$edit=$_POST["enum"];
 		$sql="select number,id from comments ;";
@@ -107,7 +110,7 @@ if(isset($_POST["edit"])){
 
 <?php
 
-if(isset($_POST["add"])){//追加
+if(isset($_POST["add"])){//新規投稿
 	if($_POST["comment"]==""&&$_FILES["userfile"]["size"]==null) $adderror="コメントを入力またはファイルを選択してください</br>";
 	else{
 		$name=$_POST["name"];
@@ -115,11 +118,11 @@ if(isset($_POST["add"])){//追加
 		$time=date("Y/n/j G:i:s");//年/月/日 時:分:秒
 		$id=$_SESSION["id"];
 		$type=$_FILES["userfile"]["type"];
-		if($type=="image/png"||$type=="image/jpg"||$type=="image/jpeg"||$type=="image/gif"){
+		if($type=="image/png"||$type=="image/jpg"||$type=="image/jpeg"||$type=="image/gif"){//画像ファイルが選択された場合
 			$size=getimagesize($_FILES["userfile"]["tmp_name"]);
 			$width=$size[0];
 			$height=$size[1];
-			if($height>400||$width>600){
+			if($height>400||$width>600){//画像ファイルの縦横サイズ取得、大きさの変更
 				$v1=$height/400;
 				$v2=$width/600;
 				if($v1>=$v2){
@@ -144,7 +147,7 @@ if(isset($_POST["add"])){//追加
 			$insert->bindparam(":filename",$_FILES["userfile"]["name"],pdo::PARAM_STR);
 			$insert->execute();
 		}
-		else if($type=="video/mp4"){
+		else if($type=="video/mp4"){//動画ファイルが選択されている場合
 			$sql="insert into comments(name,comment,id,time,data,type,filename) values(:name,:comment,:id,:time,:data,:type,:filename);";
 			$insert=$pdo->prepare($sql);
 			$insert->bindparam(":name",$name,pdo::PARAM_STR);
@@ -156,7 +159,7 @@ if(isset($_POST["add"])){//追加
 			$insert->bindparam(":filename",$_FILES["userfile"]["filename"],pdo::PARAM_STR);
 			$insert->execute();
 		}
-		else{
+		else{//メディアが選択されていない場合
 			$sql="insert into comments(name,comment,id,time) values(:name,:comment,:id,:time);";
 			$insert=$pdo->prepare($sql);
 			$insert->bindparam(":name",$name,pdo::PARAM_STR);
