@@ -1,3 +1,5 @@
+//アカウント削除
+
 <?php
 session_start();
 ?>
@@ -13,7 +15,7 @@ session_start();
 
 $error=null;
 
-if($_SESSION["id"]==""){
+if($_SESSION["id"]==""){//URL直接入力による誤動作防止
 	header("location:toppage.php");
 	exit();
 }
