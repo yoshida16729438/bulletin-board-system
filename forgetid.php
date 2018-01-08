@@ -1,3 +1,5 @@
+<!--IDを忘れたときの問い合わせ-->
+
 <?php session_start(); ?>
 
 <head>
