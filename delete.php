@@ -1,3 +1,5 @@
+//投稿を削除するページ
+
 <?php
 session_start();
 ?>
@@ -15,7 +17,7 @@ $pdo=new PDO("mysql:host=(ホスト名);dbname=(データベース名);charset=u
 
 $dnum=$_SESSION["dnum"];
 
-if($dnum==""){
+if($dnum==""){//URL直接入力による誤動作防止
 	header("location:main.php");
 	exit();
 }
@@ -73,7 +75,3 @@ $pdo=null;
 <form action="delete.php" method="post" />
 <button type="submit" name="delete" style="WIDTH:100px;HEIGHT:25px">削除</button>
 <button type="submit" name="cancel" style="WIDTH:100px;HEIGHT:25px">キャンセル</button></form>
-
-<?php
-$pdo=null;
-?>
