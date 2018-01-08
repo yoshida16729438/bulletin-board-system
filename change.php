@@ -1,3 +1,5 @@
+//各登録情報変更への分岐を行うページ
+
 <?php
 session_start();
 ?>
@@ -22,7 +24,7 @@ $stmt->bindparam(":id",$id,pdo::PARAM_STR);
 $stmt->execute();
 foreach($stmt as $row)$address=$row["address"];
 
-if($_SESSION["id"]==""||$password==""){
+if($_SESSION["id"]==""||$password==""){//URL直接入力による誤動作防止
 	header("location:toppage.php");
 	exit();
 }
