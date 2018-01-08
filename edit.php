@@ -1,3 +1,5 @@
+<!--投稿の編集-->
+
 <?php
 session_start();
 ?>
@@ -16,19 +18,19 @@ $pdo=new PDO("mysql:host=(ホスト名);dbname=(データベース名);charset=u
 $enum=$_SESSION["enum"];
 $error=null;
 
-if($enum==""){
+if($enum==""){//URL直接入力による誤動作防止
 	header("location:main.php");
 	exit();
 }
 
 if(isset($_POST["edit"])){
-	if($_POST["comment"]!=""||$_POST["media"]!="delete"){
+	if($_POST["comment"]!=""||$_POST["media"]!="delete"){//コメントもしくはメディアのいずれかが入力されているか
 		$time=date("Y/n/j G:i:s");//年/月/日 時:分:秒
 		$comment=$_POST["comment"];
 		switch($_POST["media"]){
 			case "change":
 				$type=$_FILES["userfile"]["type"];
-				if($type=="image/png"||$type=="image/jpg"||$type=="image/jpeg"||$type=="image/gif"){
+				if($type=="image/png"||$type=="image/jpg"||$type=="image/jpeg"||$type=="image/gif"){//画像を挿入するとき
 					$size=getimagesize($_FILES["userfile"]["tmp_name"]);
 					$width=$size[0];
 					$height=$size[1];
@@ -60,7 +62,7 @@ if(isset($_POST["edit"])){
 					exit();
 
 				}
-				else if($type=="video/mp4"){
+				else if($type=="video/mp4"){//動画を挿入するとき
 					$sql="update comments set comment=:comment,time=:time,data=:data,type=:type,filename=:filename where number=:number;";
 					$stmt=$pdo->prepare($sql);
 					$stmt->bindvalue(":comment",$comment,pdo::PARAM_STR);
@@ -79,7 +81,7 @@ if(isset($_POST["edit"])){
 				else $error="ファイルを選択してください<br/>";
 				break;
 
-			case "nothing":
+			case "nothing"://メディアに変更がない場合
 				$sql="update comments set comment=:comment,time=:time where number=:number;";
 				$stmt=$pdo->prepare($sql);
 				$stmt->bindvalue(":comment",$comment,pdo::PARAM_STR);
@@ -91,7 +93,7 @@ if(isset($_POST["edit"])){
 				exit();
 				break;
 
-			case "delete":
+			case "delete"://メディア削除の場合
 				$sql="update comments set comment=:comment,time=:time,data=:data,width=:width,height=:height,type=:type,filename=:filename where number=:number;";
 				$stmt=$pdo->prepare($sql);
 				$stmt->bindvalue(":comment",$comment,pdo::PARAM_STR);
