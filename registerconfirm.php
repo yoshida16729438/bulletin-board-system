@@ -1,3 +1,5 @@
+<!--新規登録の際の確認画面-->
+
 <head>
 <meta http-equiv="content-language" content="ja">
 <meta charset="UTF-8">
@@ -9,7 +11,7 @@
 
 <?php
 
-if($_SESSION["password"]==""){
+if($_SESSION["password"]==""){//URL直接入力による誤動作防止
 	header("location:register.php");
 	exit();
 }
