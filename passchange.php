@@ -1,4 +1,4 @@
-<!--changeからの分岐、パスワード変更-->
+<!--passchangecheckをクリアしていればパスワード変更-->
 
 <?php
 session_start();
