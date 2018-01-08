@@ -1,3 +1,5 @@
+<!--changeからの分岐、パスワード変更前に現在のパスワードの確認-->
+
 <?php
 session_start();
 ?>
@@ -15,7 +17,7 @@ $password=$_SESSION["password"];
 $id=$_SESSION["id"];
 $error=null;
 
-if($id==""){
+if($id==""){//URL直接入力による誤動作防止
 	header("location:change.php");
 	exit();
 }
