@@ -1,3 +1,5 @@
+<!--changeからの分岐、パスワード変更-->
+
 <?php
 session_start();
 ?>
@@ -15,7 +17,7 @@ $pdo=new PDO("mysql:host=(ホスト名);dbname=(データベース名);charset=u
 $id=$_SESSION["id"];
 $error=null;
 
-if($id==""){
+if($id==""){//URL直接入力による誤動作防止
 	header("location:change.php");
 	exit();
 }
