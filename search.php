@@ -1,3 +1,5 @@
+<!--検索機能-->
+
 <head>
 <meta http-equiv="content-language" content="ja">
 <meta charset="UTF-8">
@@ -22,7 +24,7 @@ if(isset($_POST["search"])){
 $column=$_SESSION["column"];
 $word=$_SESSION["word"];
 
-if($_SESSION["word"]==""){
+if($_SESSION["word"]==""){//URL直接入力による誤動作防止
 	header("location:main.php");
 	exit();
 }
