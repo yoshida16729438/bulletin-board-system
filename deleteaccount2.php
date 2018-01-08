@@ -1,3 +1,5 @@
+//アカウント削除の確定
+
 <?php
 session_start();
 ?>
@@ -15,7 +17,7 @@ $error=null;
 
 $pdo=new PDO("mysql:host=(ホスト名);dbname=(データベース名);charset=utf8","(ユーザー名)","(パスワード)"); //接続
 
-if($_SESSION["delete"]!=true){
+if($_SESSION["delete"]!=true){//URL直接入力による誤動作防止
 	header("location:main.php");
 	exit();
 }
