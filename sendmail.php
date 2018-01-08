@@ -1,3 +1,5 @@
+<!--新規登録が確定した際に登録メールを送信する-->
+
 <head>
 <meta http-equiv="content-language" content="ja">
 <meta charset="UTF-8">
@@ -9,7 +11,7 @@
 
 session_start();
 
-if($_SESSION["password"]==""){
+if($_SESSION["password"]==""){//URL直接入力による誤動作防止
 	header("location:register.php");
 	exit();
 }
@@ -71,11 +73,7 @@ $header="From: (管理者メールアドレス) \r\n";
 mb_language("Japanese");
 mb_internal_encoding("UTF-8");
 mb_send_mail($address,$subject,$message,$header);
-
-//$filename="out.txt";
-//file_put_contents($filename,$message);
-
-
+	
 echo "お客様情報の登録が完了となりました。ご入力いただいたメールアドレスに登録確認メールを送信いたしました。<br/>";
 echo "そちらに添付されておりますURLに接続いただくことでご利用可能となります。<br/><br/>";
 
