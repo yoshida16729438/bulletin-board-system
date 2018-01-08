@@ -1,3 +1,5 @@
+<!--掲示板トップページ兼ログインページ-->
+
 <head>
 <meta http-equiv="content-language" content="ja">
 <meta charset="UTF-8">
@@ -37,7 +39,7 @@ if($_POST["login"]){
 	}else $error1="IDを入力してください<br/>";
 }else if($_POST["manage"]){
 	if($_POST["managepassword"]!=""){
-		$sql="select password from user where id='manager';";
+		$sql="select password from user where id='(管理者ID)';";
 		$result=$pdo->query($sql);
 		foreach($result as $row){
 			if($row[0]==$_POST["managepassword"]){
