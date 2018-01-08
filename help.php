@@ -1,3 +1,5 @@
+<!--ヘルプページ-->
+
 <head>
 <meta http-equiv="content-language" content="ja">
 <meta charset="UTF-8">
