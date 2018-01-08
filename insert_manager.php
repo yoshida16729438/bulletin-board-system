@@ -1,3 +1,5 @@
+<!--初期状態では管理者のデータが存在しないので挿入-->
+
 <head>
 <meta http-equiv="content-language" content="ja">
 <meta charset="UTF-8">
