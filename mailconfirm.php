@@ -1,3 +1,5 @@
+<!--登録メールに添付されたアドレスから接続されるページ-->
+
 <head>
 <meta http-equiv="content-language" content="ja">
 <meta charset="UTF-8">
