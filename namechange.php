@@ -1,3 +1,5 @@
+<!--changeから分岐、ユーザー名変更-->
+
 <?php
 session_start();
 ?>
@@ -14,7 +16,7 @@ session_start();
 $pdo=new PDO("mysql:host=(ホスト名);dbname=(データベース名);charset=utf8","(ユーザー名)","(パスワード)"); //接続
 $id=$_SESSION["id"];
 
-if($_SESSION["id"]==""){
+if($_SESSION["id"]==""){//URL直接入力による誤動作防止
 	header("location:change.php");
 	exit();
 }
