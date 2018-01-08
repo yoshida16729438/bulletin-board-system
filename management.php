@@ -1,3 +1,5 @@
+<!--管理者専用ページ-->
+
 <head>
 <meta http-equiv="content-language" content="ja">
 <meta charset="UTF-8">
@@ -8,12 +10,12 @@
 <h1>(掲示板名)　管理ページ<br/></h1>
 <?php
 
-if($_SESSION["manage"]==""){
+if($_SESSION["manage"]==""){//URL直接入力による誤動作防止
 	header("location:toppage.php");
 	exit();
 }
 
-if(isset($_POST["exit"])){
+if(isset($_POST["exit"])){//ログアウト処理
 	unset($_SESSION["manage"]);
 	header("location:toppage.php");
 	exit();
