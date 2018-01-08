@@ -1,5 +1,5 @@
-//登録されているメールアドレス変更のページです
-//main→change→addresschangeのように移動します
+<!--登録されているメールアドレス変更のページです
+main→change→addresschangeのように移動します-->
 
 <?php
 session_start();
