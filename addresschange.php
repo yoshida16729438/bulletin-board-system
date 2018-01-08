@@ -1,3 +1,6 @@
+//登録されているメールアドレス変更のページです
+//main→change→addresschangeのように移動します
+
 <?php
 session_start();
 ?>
@@ -16,7 +19,7 @@ $id=$_SESSION["id"];
 
 if(isset($_POST["exit"]))unset($_SESSION["address"]);
 
-if($_SESSION["address"]==""){
+if($_SESSION["address"]==""){//URL直接入力による誤動作の防止
 	header("location:change.php");
 	exit();
 }
