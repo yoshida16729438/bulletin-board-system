@@ -1,3 +1,6 @@
+<!--パスワード問い合わせ成功時にメールに添付して送信するページ
+メール本文テンプレートはforgetpasswordmail.txt-->
+
 <?php session_start(); ?>
 
 <head>
@@ -12,7 +15,7 @@ $error=null;
 
 $pdo=new PDO("mysql:host=(ホスト名);dbname=(データベース名);charset=utf8","(ユーザー名)","(パスワード)"); //接続
 
-if($_SESSION["address"]==""){
+if($_SESSION["address"]==""){//URL直接入力による誤動作防止
 	header("location:toppage.php");
 	exit();
 }
@@ -22,7 +25,7 @@ $content=file_get_contents($filename);
 $mail=explode("<>",$content);
 $message=$_SESSION["name"].$mail[0].$_SESSION["password"].$mail[1];
 $subject="パスワードのお問い合わせに関して";
-$header="From: 管理者メールアドレス \r\n";
+$header="From: (管理者メールアドレス) \r\n";
 mb_language("Japanese");
 mb_internal_encoding("UTF-8");
 mb_send_mail($_SESSION["address"],$subject,$message,$header);
