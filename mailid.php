@@ -1,3 +1,6 @@
+<!--ID問い合わせ成功時にメールにIDを添付して送信するページ
+メール本文テンプレ―トはforgetidmail.txt-->
+
 <?php session_start(); ?>
 
 <head>
@@ -12,7 +15,7 @@ $error=null;
 
 $pdo=new PDO("mysql:host=(ホスト名);dbname=(データベース名);charset=utf8","(ユーザー名)","(パスワード)"); //接続
 
-if($_SESSION["address"]==""){
+if($_SESSION["address"]==""){//URL直接入力による誤動作防止
 	header("location:toppage.php");
 	exit();
 }
