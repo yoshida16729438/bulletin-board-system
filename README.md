@@ -9,5 +9,6 @@ bulletin board by mysqlの発展です
 ・退会
 ・ログインID・パスワード問い合わせ機能
 ・管理者によるアカウント凍結・凍結解除機能
+参考までにmain.jpgとhelp.jpgがそれぞれメインページとヘルプページの表示サンプルとなっています
 
 This is one of tasks of "IESO Internship".
